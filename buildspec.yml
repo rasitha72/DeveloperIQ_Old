@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image for metrics_to_rds...
+      - docker build -t $REPOSITORY_URI_METRICS:latest -f Dockerfile.metrics_to_rds .
+      - docker tag $REPOSITORY_URI_METRICS:latest $REPOSITORY_URI_METRICS:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - echo Building the Docker image for read_rds...
+      - docker build -t $REPOSITORY_URI_READ:latest -f Dockerfile.read_rds .
+      - docker tag $REPOSITORY_URI_READ:latest $REPOSITORY_URI_READ:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI_METRICS:latest
+      - docker push $REPOSITORY_URI_METRICS:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $REPOSITORY_URI_READ:latest
+      - docker push $REPOSITORY_URI_READ:$CODEBUILD_RESOLVED_SOURCE_VERSION
