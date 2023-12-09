@@ -1,7 +1,7 @@
 FROM python:alpine
 WORKDIR /app
 
-COPY update_script.py . /app/
+COPY scripts/update_script.py . /app/
 
 # Install psycopg2-binary and other dependencies directly
 RUN pip install psycopg2-binary \
