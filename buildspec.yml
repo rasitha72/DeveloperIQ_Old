@@ -1,21 +1,19 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.9 
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws --version
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics
+
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image for metrics_to_rds...
+      - echo Building the Docker image for your-app...
       - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest .
+
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker images...
+      - echo Pushing the Docker image...
       - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest
