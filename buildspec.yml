@@ -13,7 +13,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for metrics_to_rds...
-      - docker build -t public.ecr.aws/g0z6e9p3/write-metrics:latest -f Dockerfile.updaterds .
+      - docker build -t public.ecr.aws/g0z6e9p3/write-metrics:latest .
   post_build:
     commands:
       - echo Build completed on `date`
