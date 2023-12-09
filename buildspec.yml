@@ -6,7 +6,10 @@ phases:
       python: 3.10
     commands:
       - echo Installing AWS CLI and kubectl
-      - apt-get update && apt-get install -y awscli kubectl
+      - curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/
+      - apt-get install -y awscli
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
