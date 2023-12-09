@@ -7,4 +7,4 @@ COPY update_script.py . /app
 RUN pip install psycopg2-binary==2.9.1 \
     && pip install Werkzeug==2.0.1 \
     && pip install requests==2.26.0
-CMD ["python", "update_script.py"]
+CMD ["python3", "update_script.py"]
