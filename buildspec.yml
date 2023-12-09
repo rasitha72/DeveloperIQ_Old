@@ -13,16 +13,16 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for metrics_to_rds...
-      - docker build -t $REPOSITORY_URI_METRICS:latest -f Dockerfile.metrics_to_rds .
-      - docker tag $REPOSITORY_URI_METRICS:latest $REPOSITORY_URI_METRICS:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest -f Dockerfile.metrics_to_rds .
+      - docker tag 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image
       - echo Building the Docker image for read_rds...
-      - docker build -t $REPOSITORY_URI_READ:latest -f Dockerfile.read_rds .
-      - docker tag $REPOSITORY_URI_READ:latest $REPOSITORY_URI_READ:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image:latest -f Dockerfile.read_rds .
+      - docker tag $REPOSITORY_URI_READ:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI_METRICS:latest
-      - docker push $REPOSITORY_URI_METRICS:$CODEBUILD_RESOLVED_SOURCE_VERSION
-      - docker push $REPOSITORY_URI_READ:latest
-      - docker push $REPOSITORY_URI_READ:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest
+      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image
+      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image:latest
+      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image
