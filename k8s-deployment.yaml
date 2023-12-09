@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iit-kube-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: write-metrics-app
+  template:
+    metadata:
+      labels:
+        app: write-metrics-app
+    spec:
+      containers:
+      - name: write-metrics-container
+        image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
