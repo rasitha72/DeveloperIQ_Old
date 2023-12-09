@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9
 
 WORKDIR /app
 
@@ -9,4 +9,3 @@ RUN pip install psycopg2-binary
 RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "update_script.py"]
-
