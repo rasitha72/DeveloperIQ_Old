@@ -8,21 +8,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g0z6e9p3/write-metrics
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for metrics_to_rds...
-      - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest -f Dockerfile.metrics_to_rds .
-      - docker tag 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image
-      - echo Building the Docker image for read_rds...
-      - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image:latest -f Dockerfile.read_rds .
-      - docker tag $REPOSITORY_URI_READ:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image
+      - docker build -t public.ecr.aws/g0z6e9p3/write-metrics:latest -f Dockerfile.updaterds .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image:latest
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/rds-write-image
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image:latest
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/docker-hub/rasitha123/flask-app-image
+      - docker push public.ecr.aws/g0z6e9p3/write-metrics:latest
