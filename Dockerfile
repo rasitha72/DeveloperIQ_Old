@@ -1,7 +1,7 @@
 FROM python:3.10
 WORKDIR /app
 
-COPY update_script.py . /app
+COPY update_script.py . .
 
 # Install psycopg2-binary and other dependencies directly
 RUN pip install psycopg2-binary==2.9.1 \
