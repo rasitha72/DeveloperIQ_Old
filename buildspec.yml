@@ -1,4 +1,4 @@
-version: 0.2
+FAversion: 0.2
 
 phases:
   install:
@@ -8,14 +8,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g0z6e9p3/write-metrics
+      - aws ecr-public get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amozon.aws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for metrics_to_rds...
-      - docker build -t public.ecr.aws/g0z6e9p3/write-metrics:latest .
+      - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amozon.aws.com/$IMAGE_REPO_NAME:$IMAGE_TAG .
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker images...
-      - docker push public.ecr.aws/g0z6e9p3/write-metrics:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amozon.aws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
