@@ -8,17 +8,17 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - export LC_ALL="en_US.utf8"
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/g0z6e9p3/write-metrics
 
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for your-app...
       - docker build -t write-metrics:latest .
-      - docker tag write-metrics:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest
+      - docker tag write-metrics:latest public.ecr.aws/g0z6e9p3/write-metrics:latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest
+      - docker push public.ecr.aws/g0z6e9p3/write-metrics:latest
