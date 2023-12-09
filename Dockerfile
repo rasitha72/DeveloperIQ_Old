@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python: alpine
 WORKDIR /app
 
 COPY update_script.py . /app
