@@ -11,10 +11,11 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image for your-app...
-      - docker build -t 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:1.0.0 .
+      - docker build -t write-metrics:latest .
+      - docker tag write-metrics:latest 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest
 
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:1.0.0
+      - docker push 412485745957.dkr.ecr.us-east-1.amazonaws.com/write-metrics:latest
