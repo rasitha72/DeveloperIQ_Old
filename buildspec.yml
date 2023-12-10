@@ -7,10 +7,10 @@ phases:
     commands:
       - echo "Installing app dependencies..."
       - curl -LO https://amazon-eks.s3.us-west-2.amazonaws.com/1.18.9/2020-11-02/bin/linux/amd64/kubectl
-      - chmod +x ./kubectl
-      - mkdir -p $HOME/bin && mv ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
-      - echo 'export PATH=$HOME/bin:$PATH' >> ~/.bashrc
-      - . ~/.bashrc
+      - chmod +x kubectl
+      - mkdir -p $HOME/bin && mv kubectl $HOME/bin/kubectl
+      - echo 'export PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
+      - export PATH=$HOME/bin:$PATH
       - echo 'Check kubectl version'
       - kubectl version --short --client
       - pwd
