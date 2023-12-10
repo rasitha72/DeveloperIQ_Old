@@ -22,6 +22,7 @@ phases:
       - aws eks --region us-east-1 update-kubeconfig --name IIT-EKS-DeveloperIQ
       - echo check config
       - kubectl config view --minify
+      - cat ~/.kube/config
       - echo check kubectl access
       - kubectl get svc
   build:
