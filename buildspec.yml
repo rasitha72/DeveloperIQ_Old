@@ -28,6 +28,8 @@ phases:
       - echo check config
       - kubectl config view --minify
       - cat ~/.kube/config
+      - echo "Check kubectl get pods"
+      - kubectl get pods
       - echo check kubectl access
       - kubectl get svc
   build:
