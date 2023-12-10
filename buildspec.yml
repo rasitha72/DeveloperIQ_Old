@@ -13,6 +13,9 @@ phases:
       - . ~/.bashrc
       - echo 'Check kubectl version'
       - kubectl version --short --client
+      - pwd
+      - ls -la
+      - echo "Current working directory:$(pwd)"
       - apt-get update
       - apt-get install -y awscli
   pre_build:
