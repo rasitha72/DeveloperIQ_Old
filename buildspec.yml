@@ -13,6 +13,8 @@ phases:
       - . ~/.bashrc
       - echo 'Check kubectl version'
       - kubectl version --short --client
+      - apt-get update
+      - apt-get install -y awscli
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
